@@ -172,8 +172,7 @@ API clients should use up a fixed amount of threads to perform async calls, task
 
 ### Naming conventions for public classes and methods across clients
 
-* StreamAnalytics: the main class responsible for creating Tracker instances
-* Tracker: the class that exposes the API event methods
+* StreamAnalytics: the main class responsible for sending events to the APIs
     * send: send an event to the APIs
 * Engagement: the engagement class holding engagement data
 * Impression: the impression class holding impression data
@@ -197,13 +196,10 @@ io.getstream.analytics
 
 ```java
 // gets the instance of StreamAnalytics (Singleton)
-StreamAnalytics analytics = StreamAnalytics.getInstance(context);
-
-// gets a new instance of Tracker for specific user_id
-Tracker tracker analytics.newTracker("user_id");
+StreamAnalytics analytics = StreamAnalytics.getInstance("user_id");
 
 // track an engagement event
-tracker.send(new Engagement.EventBuilder()
+analytics.send(new Engagement.EventBuilder()
        .setActivityID("activity-xxx")
        .setFeedId("feed-xxx")
        .setLabel("click")
@@ -211,7 +207,7 @@ tracker.send(new Engagement.EventBuilder()
        .build());
 
 // track an engagement event
-tracker.send(new Impression.EventBuilder()
+analytics.send(new Impression.EventBuilder()
        .setActivityIDs(Arrays.asList("id1", "id2, "id3"))
        .setFeedId("feed-xxx")
        .build());
