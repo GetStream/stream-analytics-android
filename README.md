@@ -208,7 +208,7 @@ analytics.send(new Engagement.EventBuilder()
 
 // track an engagement event
 analytics.send(new Impression.EventBuilder()
-       .setActivityIDs(Arrays.asList("id1", "id2, "id3"))
+       .setActivityIDs(Arrays.asList("id1", "id2", "id3"))
        .setFeedId("feed-xxx")
        .build());
 ```
