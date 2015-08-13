@@ -47,19 +47,6 @@ api_key=<api_key>
 
 > NOTE: api_key and jwt_token are provided as coupled pairs, it is not mix api_key and jwt_token coming from different tuples.
 
-
-In case you want to generate the token yourself, the JWT Token payload is the following
-```
-{
-    'action': 'write',
-    'feed_id': '*',
-    'resource': 'analytics'
-}
-```
-
-and the payload must be encoded with the api_secret related to the given api_key (http://jwt.io/)
-
-
 ### Testing authentication
 
 Authentication can be tested on the /auth_test/
