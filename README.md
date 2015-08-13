@@ -203,7 +203,7 @@ analytics.send(new Impression.EventBuilder()
 How to use it
 -------------
 
-Import the library (without dependencies) in your gradle project:
+Import the library in your gradle project:
 
 ```
     dependencies {
