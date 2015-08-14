@@ -46,7 +46,7 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 	}
 
     @Override
-    public void handleActionEngagement(String jsonPayload) {
+    public void sendEngagement(String jsonPayload) {
         performVoidCall(new Request.Builder()
                 .url(engagementEndpoint)
                 .post(RequestBody.create(MEDIA_TYPE_JSON, jsonPayload))
@@ -56,7 +56,7 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
     }
 
     @Override
-    public void handleActionEngagement(Engagement engagement) {
+    public void sendEngagement(Engagement engagement) {
         performVoidCall(new Request.Builder()
                 .url(engagementEndpoint)
                 .post(RequestBody.create(MEDIA_TYPE_JSON, gson.toJson(engagement)))
@@ -66,7 +66,7 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
     }
 
     @Override
-    public void handleActionImpression(String jsonPayload) {
+    public void sendImpression(String jsonPayload) {
         performVoidCall(new Request.Builder()
                 .url(impressionEndpoint)
                 .post(RequestBody.create(MEDIA_TYPE_JSON, jsonPayload))
@@ -76,7 +76,7 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
     }
 
     @Override
-    public void handleActionImpression(Impression impression) {
+    public void sendImpression(Impression impression) {
         performVoidCall(new Request.Builder()
                 .url(impressionEndpoint)
                 .post(RequestBody.create(MEDIA_TYPE_JSON, gson.toJson(impression)))

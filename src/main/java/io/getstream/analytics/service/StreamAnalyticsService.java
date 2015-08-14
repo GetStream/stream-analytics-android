@@ -11,9 +11,6 @@ import com.google.gson.Gson;
 import io.getstream.analytics.beans.Engagement;
 import io.getstream.analytics.beans.Impression;
 import io.getstream.analytics.config.StreamAnalyticsAuth;
-import io.getstream.analytics.config.StreamAnalyticsClient;
-import io.getstream.analytics.repository.AnalyticsRepository;
-import io.getstream.analytics.repository.AnalyticsRepositoryImpl;
 
 /**
  * Send out analytic events to the Stream service.
@@ -31,7 +28,8 @@ public class StreamAnalyticsService extends IntentService {
 
     private static final Gson GSON = new Gson();
 
-    private AnalyticsRepository analyticsRepository;
+    private StreamAnalytics analytics;
+	private StreamAnalyticsAuth streamAnalyticsAuth;
 
     public StreamAnalyticsService() {
         super("StreamAnalyticsService");
@@ -64,13 +62,12 @@ public class StreamAnalyticsService extends IntentService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		if (null == analyticsRepository) {
-            StreamAnalyticsAuth streamAnalyticsAuth = getStreamAnalyticsAuth();
+		if (null == analytics) {
+            StreamAnalyticsAuth streamAnalyticsAuth = getAnalyticsAuth();
             if (null == streamAnalyticsAuth) {
                 throw new RuntimeException("Cannot retrieve Stream.io analytics settings");
             }
-            analyticsRepository = new AnalyticsRepositoryImpl(StreamAnalyticsClient.newClient(),
-                    streamAnalyticsAuth);
+			analytics = StreamAnalytics.getInstance(streamAnalyticsAuth);
         }
 	}
 
@@ -79,14 +76,18 @@ public class StreamAnalyticsService extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_ENGAGEMENT.equals(action)) {
-                analyticsRepository.handleActionEngagement(intent.getStringExtra(EXTRA_PAYLOAD));
+				analytics.handleActionEngagement(intent.getStringExtra(EXTRA_PAYLOAD));
             } else if (ACTION_IMPRESSION.equals(action)) {
-                analyticsRepository.handleActionImpression(intent.getStringExtra(EXTRA_PAYLOAD));
+				analytics.handleActionImpression(intent.getStringExtra(EXTRA_PAYLOAD));
             }
         }
     }
 
-    private StreamAnalyticsAuth getStreamAnalyticsAuth() {
+    private StreamAnalyticsAuth getAnalyticsAuth() {
+		if (null != this.streamAnalyticsAuth) {
+			return this.streamAnalyticsAuth;
+		}
+
 		try {
 			final Bundle data = getPackageManager().getServiceInfo(new ComponentName(this,
 							StreamAnalyticsService.class), PackageManager.GET_META_DATA).metaData;
@@ -98,7 +99,7 @@ public class StreamAnalyticsService extends IntentService {
 		return null;
     }
 
-    public void setAnalyticsRepository(AnalyticsRepository analyticsRepository) {
-        this.analyticsRepository = analyticsRepository;
-    }
+	public void setStreamAnalyticsAuth(StreamAnalyticsAuth streamAnalyticsAuth) {
+		this.streamAnalyticsAuth = streamAnalyticsAuth;
+	}
 }

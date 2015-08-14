@@ -9,13 +9,10 @@ import io.getstream.analytics.beans.Impression;
  */
 public interface AnalyticsRepository {
 
-    void handleActionEngagement(String jsonPayload);
+	void sendEngagement(String jsonPayload);
+	void sendEngagement(Engagement engagement);
+	void sendImpression(String jsonPayload);
+	void sendImpression(Impression impression);
 
-    void handleActionEngagement(Engagement engagement);
-
-    void handleActionImpression(String jsonPayload);
-
-    void handleActionImpression(Impression impression);
-
-    OkHttpClient getClient();
+	OkHttpClient getClient();
 }

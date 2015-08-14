@@ -7,6 +7,12 @@ import java.util.concurrent.TimeUnit;
 
 public class StreamAnalyticsClient {
 
+	private final OkHttpClient client;
+
+	public StreamAnalyticsClient() {
+		this.client = initClient(new StreamAnalyticsConfiguration());
+	}
+
     private OkHttpClient initClient(final StreamAnalyticsConfiguration config) {
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(config.getConnectionTimeout(), TimeUnit.MILLISECONDS);
@@ -17,8 +23,8 @@ public class StreamAnalyticsClient {
         return client;
     }
 
-    public static OkHttpClient newClient() {
+    public OkHttpClient newClient() {
         //TODO: configuration shall retrieve properties from manifest
-        return new StreamAnalyticsClient().initClient(new StreamAnalyticsConfiguration());
+        return this.client;
     }
 }

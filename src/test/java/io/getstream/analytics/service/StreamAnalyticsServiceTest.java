@@ -7,8 +7,6 @@ import com.google.gson.Gson;
 import io.getstream.analytics.beans.Engagement;
 import io.getstream.analytics.beans.Impression;
 import io.getstream.analytics.config.StreamAnalyticsAuth;
-import io.getstream.analytics.config.StreamAnalyticsClient;
-import io.getstream.analytics.repository.AnalyticsRepositoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +36,7 @@ public class StreamAnalyticsServiceTest {
 		StreamAnalyticsAuth auth = new StreamAnalyticsAuth("nfq26m3qgfyp",
 				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiJ3cml0ZSIsImZlZWRfaWQiOiIqIiwicmVzb3VyY2UiOiJhbmFseXRpY3MifQ.pFU9mTsGtBuhdU-_NjKmd6dLRwvAcNskeMZ97BRRMnE");
 		streamAnalyticsService = new StreamAnalyticsService();
-		streamAnalyticsService.setAnalyticsRepository(new AnalyticsRepositoryImpl(StreamAnalyticsClient.newClient(), auth));
+		streamAnalyticsService.setStreamAnalyticsAuth(auth);
 		streamAnalyticsService.onCreate();
 	}
 
