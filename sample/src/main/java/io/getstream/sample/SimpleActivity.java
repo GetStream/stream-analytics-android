@@ -2,7 +2,11 @@ package io.getstream.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import io.getstream.analytics.beans.Engagement;
 import io.getstream.analytics.beans.Impression;
@@ -22,23 +26,45 @@ public class SimpleActivity extends Activity {
                 getString(R.string.auth_api_token)
         );
         mStreamAnalytics = StreamAnalytics.getInstance(auth);
-        StreamAnalytics.setUserId("tracking_user");
     }
 
     public void trackImpression(View view) {
+        HashMap<String, Object> extras = new HashMap<>();
+        extras.put("onestring", "string");
+        extras.put("oneint", 12);
+
+//        ArrayList<Pair<String, String>> features = new ArrayList<>();
+//        features.add(new Pair<>("hello", "world"));
+//        features.add(new Pair<>("more", "streams"));
+
         mStreamAnalytics.handleActionImpression(new Impression.EventBuilder()
-                        .withActivityIds(new String[]{"id_1", "id_2"})
-                        .withFeedId("feed_1")
+                        .withForeignIds(new String[]{"message:34349698", "message:34349699"})
+                        .withFeedId("user:ChartMill")
+                        .withUserId("tom")
+                        .withBoost(1)
+                        .withLocation("Amsterdam")
+                        .withPosition(SimpleActivity.class.getSimpleName())
+                        .withExtraData(extras)
+//                        .withFeatures(features)
                         .build()
         );
     }
 
     public void trackEngagement(View view) {
+        HashMap<String, Object> extras = new HashMap<>();
+        extras.put("onestring", "string");
+        extras.put("oneint", 12);
+
         mStreamAnalytics.handleActionEngagement(new Engagement.EventBuilder()
-                        .withActivityId("id_1")
-                        .withFeedId("feed_1")
+                        .withForeignId("message:34349698")
+                        .withFeedId("user:ChartMill")
                         .withLabel("Engagement click")
+                        .withUserId("tom")
                         .withScore(1d)
+                        .withBoost(1)
+                        .withLocation("Amsterdam")
+                        .withPosition(SimpleActivity.class.getSimpleName())
+                        .withExtraData(extras)
                         .build()
         );
     }

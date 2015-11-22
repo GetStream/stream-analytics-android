@@ -2,7 +2,4 @@
 <resources>
     <string name="auth_api_key">8r9brv6v4xj5</string>
     <string name="auth_api_token">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiJ3cml0ZSIsInVzZXJfaWQiOiIqIiwicmVzb3VyY2UiOiJhbmFseXRpY3MifQ.rKwIdyV10DQyoFgC-KmAXBUljoFU7wbeqQV6uqNvSDg</string>
-
-    <!--<string name="auth_api_key">gn2uuxjje8yp</string>-->
-    <!--<string name="auth_api_token">c7rq9sq8mnb8har3wehaqkchprrsb8nh82mdsury6sgyu9wzucwd4n8ab2yfpty4</string>-->
 </resources>

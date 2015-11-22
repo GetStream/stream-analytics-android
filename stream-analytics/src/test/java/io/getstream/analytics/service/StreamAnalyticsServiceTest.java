@@ -45,7 +45,7 @@ public class StreamAnalyticsServiceTest {
 		Intent intent = new Intent(context, StreamAnalyticsService.class);
 		intent.setAction(StreamAnalyticsService.ACTION_IMPRESSION);
 		intent.putExtra(StreamAnalyticsService.EXTRA_PAYLOAD, GSON.toJson(
-				new Impression.EventBuilder().withActivityIds("1", "2").withFeedId("1").build()
+				new Impression.EventBuilder().withForeignIds("1", "2").withFeedId("1").build()
 		));
 
 		streamAnalyticsService.onHandleIntent(intent);
@@ -56,7 +56,7 @@ public class StreamAnalyticsServiceTest {
 		Intent intent = new Intent(context, StreamAnalyticsService.class);
 		intent.setAction(StreamAnalyticsService.ACTION_ENGAGEMENT);
 		intent.putExtra(StreamAnalyticsService.EXTRA_PAYLOAD, GSON.toJson(
-				new Engagement.EventBuilder().withActivityId("1").withFeedId("1").build()
+				new Engagement.EventBuilder().withForeignId("1").withFeedId("1").build()
 		));
 
 		streamAnalyticsService.onHandleIntent(intent);
