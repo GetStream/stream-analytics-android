@@ -1,0 +1,4 @@
+include ':sample'
+include ':stream-analytics'
+
+rootProject.name = 'stream-analytics-parent'

@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+    }
+
+    buildTypes {
+        release {
+            //consumerProguardFiles 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile deps.supportAnnotations
+    compile deps.okHttp
+    compile deps.gson
+    provided deps.supportv4
+
+//    testCompile deps.junit
+//    testCompile deps.truth
+//    testCompile deps.robolectric
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

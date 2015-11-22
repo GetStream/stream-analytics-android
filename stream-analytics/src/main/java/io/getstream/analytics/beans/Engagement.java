@@ -1,11 +1,14 @@
 package io.getstream.analytics.beans;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Engagement {
 
-    private final String activityId;
-    private final String feedId;
+    @SerializedName("activity_id") private final String activityId;
+    @SerializedName("feed_id") private final String feedId;
     private final String label;
     private final Double score;
+    @SerializedName("user_id") private String userId;
 
     private Engagement(final String activityId,
                        final String feedId,
@@ -15,6 +18,10 @@ public class Engagement {
         this.feedId = feedId;
         this.label = label;
         this.score = score;
+    }
+
+    public void setUserId(final String userId) {
+        this.userId = userId;
     }
 
     public static class EventBuilder {

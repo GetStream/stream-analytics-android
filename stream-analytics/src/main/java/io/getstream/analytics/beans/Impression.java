@@ -1,13 +1,17 @@
 package io.getstream.analytics.beans;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Impression {
 
-    private String[] activityIds;
-    private String feedId;
+    @SerializedName("foreign_ids") private String[] activityIds;
+    @SerializedName("feed_id") private String feedId;
+    @SerializedName("user_id") private String userId;
 
-    private Impression(String[] activityIds, String feedId) {
+    private Impression(String[] activityIds, String feedId, String userId) {
         this.activityIds = activityIds;
         this.feedId = feedId;
+        this.userId = userId;
     }
 
     public static class EventBuilder {
@@ -26,7 +30,7 @@ public class Impression {
         }
 
         public Impression build() {
-            return new Impression(activityIds, feedId);
+            return new Impression(activityIds, feedId, "8r9brv6v4xj5");
         }
     }
 }

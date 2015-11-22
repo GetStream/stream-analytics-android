@@ -9,6 +9,7 @@ import io.getstream.analytics.repository.AnalyticsRepositoryImpl;
 public final class StreamAnalytics {
 
 	private static StreamAnalytics instance;
+	private static String userId = null;
 
 	private final AnalyticsRepositoryImpl repository;
 
@@ -21,10 +22,15 @@ public final class StreamAnalytics {
 			synchronized(StreamAnalytics.class) {
 				if (instance == null) {
 					instance = new StreamAnalytics(auth);
+					userId = auth.getApiKey();
 				}
 			}
 		}
 		return instance;
+	}
+
+	public static void setUserId(String userId) {
+		StreamAnalytics.userId = userId;
 	}
 
 	public void handleActionEngagement(String jsonPayload) {
@@ -32,6 +38,7 @@ public final class StreamAnalytics {
 	}
 
 	public void handleActionEngagement(Engagement engagement) {
+		engagement.setUserId(userId);
 		repository.sendEngagement(engagement);
 	}
 

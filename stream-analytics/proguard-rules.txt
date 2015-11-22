@@ -1,0 +1,10 @@
+-keep class io.getstream.analytics.** { *; }
+-dontwarn io.getstream.analytics.internal.**
+
+-keepclasseswithmembernames class * {
+    @io.getstream.analytics.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @io.getstream.analytics.* <methods>;
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stream</string>
+
+    <string name="button_engagement">Track engagement</string>
+    <string name="button_impression">Track impression</string>
+</resources>
