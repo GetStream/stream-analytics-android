@@ -2,10 +2,8 @@ package io.getstream.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.getstream.analytics.beans.Engagement;
@@ -33,11 +31,17 @@ public class SimpleActivity extends Activity {
         extras.put("onestring", "string");
         extras.put("oneint", 12);
 
+        // TODO
+        // * add features: [{'group': '...', 'value': '...'}]
+        // * log success and failures
+        // * remove extra_data
+        // * remove raw json variants, makes no sense
+
 //        ArrayList<Pair<String, String>> features = new ArrayList<>();
 //        features.add(new Pair<>("hello", "world"));
 //        features.add(new Pair<>("more", "streams"));
 
-        mStreamAnalytics.handleActionImpression(new Impression.EventBuilder()
+        mStreamAnalytics.send(new Impression.EventBuilder()
                         .withForeignIds(new String[]{"message:34349698", "message:34349699"})
                         .withFeedId("user:ChartMill")
                         .withUserId("tom")
@@ -46,7 +50,7 @@ public class SimpleActivity extends Activity {
                         .withPosition(SimpleActivity.class.getSimpleName())
                         .withExtraData(extras)
 //                        .withFeatures(features)
-                        .build()
+                        .build();
         );
     }
 
@@ -55,7 +59,13 @@ public class SimpleActivity extends Activity {
         extras.put("onestring", "string");
         extras.put("oneint", 12);
 
-        mStreamAnalytics.handleActionEngagement(new Engagement.EventBuilder()
+        // TODO
+        // * add features: [{'group': '...', 'value': '...'}]
+        // * log success and failures
+        // * remove extra_data
+        // * remove raw json variants, makes no sense
+
+        mStreamAnalytics.send(new Engagement.EventBuilder()
                         .withForeignId("message:34349698")
                         .withFeedId("user:ChartMill")
                         .withLabel("Engagement click")

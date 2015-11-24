@@ -27,6 +27,14 @@ public final class StreamAnalytics {
 		return instance;
 	}
 
+	public void send(Engagement engagement) {
+		repository.sendEngagement(engagement);
+	}
+
+	public void send(Impression impression) {
+		repository.sendImpression(impression);
+	}
+
 	public void handleActionEngagement(String jsonPayload) {
 		repository.sendEngagement(jsonPayload);
 	}
