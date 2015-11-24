@@ -24,6 +24,7 @@ public class SimpleActivity extends Activity {
                 getString(R.string.auth_api_token)
         );
         mStreamAnalytics = StreamAnalytics.getInstance(auth);
+        mStreamAnalytics.setDebug(BuildConfig.DEBUG);
     }
 
     public void trackImpression(View view) {
@@ -33,9 +34,6 @@ public class SimpleActivity extends Activity {
 
         // TODO
         // * add features: [{'group': '...', 'value': '...'}]
-        // * log success and failures
-        // * remove extra_data
-        // * remove raw json variants, makes no sense
 
 //        ArrayList<Pair<String, String>> features = new ArrayList<>();
 //        features.add(new Pair<>("hello", "world"));
@@ -48,9 +46,8 @@ public class SimpleActivity extends Activity {
                         .withBoost(1)
                         .withLocation("Amsterdam")
                         .withPosition(SimpleActivity.class.getSimpleName())
-                        .withExtraData(extras)
 //                        .withFeatures(features)
-                        .build();
+                        .build()
         );
     }
 
@@ -61,9 +58,6 @@ public class SimpleActivity extends Activity {
 
         // TODO
         // * add features: [{'group': '...', 'value': '...'}]
-        // * log success and failures
-        // * remove extra_data
-        // * remove raw json variants, makes no sense
 
         mStreamAnalytics.send(new Engagement.EventBuilder()
                         .withForeignId("message:34349698")
@@ -74,7 +68,6 @@ public class SimpleActivity extends Activity {
                         .withBoost(1)
                         .withLocation("Amsterdam")
                         .withPosition(SimpleActivity.class.getSimpleName())
-                        .withExtraData(extras)
                         .build()
         );
     }

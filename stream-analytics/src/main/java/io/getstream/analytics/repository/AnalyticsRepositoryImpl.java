@@ -1,14 +1,22 @@
 package io.getstream.analytics.repository;
 
 import android.util.Log;
+
 import com.google.gson.Gson;
-import com.squareup.okhttp.*;
-import io.getstream.analytics.beans.Engagement;
-import io.getstream.analytics.beans.Impression;
-import io.getstream.analytics.config.StreamAnalyticsAuth;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.HttpUrl;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.util.Arrays;
+
+import io.getstream.analytics.beans.Engagement;
+import io.getstream.analytics.beans.Impression;
+import io.getstream.analytics.config.StreamAnalyticsAuth;
 
 /**
  * Implementation of the REST client for Stream Analytics service.
@@ -35,6 +43,8 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 	private final HttpUrl engagementEndpoint;
 	private final HttpUrl impressionEndpoint;
 
+    private boolean debug = false;
+
 	public AnalyticsRepositoryImpl(final OkHttpClient client, StreamAnalyticsAuth analyticsAuth) {
         this.client = client;
         this.authToken = analyticsAuth.getAuthToken();
@@ -45,6 +55,11 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 				newBuilder().addPathSegment(IMPRESSION_PATH_PARAM).addQueryParameter(PARAM_API_KEY,
                 analyticsAuth.getApiKey()).build();
 	}
+
+    @Override
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
 
     @Override
     public void sendEngagement(String jsonPayload) {
@@ -58,7 +73,13 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 
     @Override
     public void sendEngagement(Engagement engagement) {
-        //Log.d(TAG, gson.toJson(engagement));
+        if (debug) {
+            Log.d(TAG, "-------");
+            Log.d(TAG, "Generated json");
+            Log.d(TAG, gson.toJson(engagement));
+            Log.d(TAG, "-------");
+        }
+
         performVoidCall(new Request.Builder()
                 .url(engagementEndpoint)
                 .post(RequestBody.create(MEDIA_TYPE_JSON, gson.toJson(engagement)))
@@ -79,7 +100,13 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 
     @Override
     public void sendImpression(Impression impression) {
-        //Log.d(TAG, gson.toJson(impression));
+        if (debug) {
+            Log.d(TAG, "-------");
+            Log.d(TAG, "Generated json");
+            Log.d(TAG, gson.toJson(impression));
+            Log.d(TAG, "-------");
+        }
+
         performVoidCall(new Request.Builder()
                 .url(impressionEndpoint)
                 .post(RequestBody.create(MEDIA_TYPE_JSON, gson.toJson(impression)))
@@ -94,18 +121,28 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
     }
 
     public void performVoidCall(Request request) {
-        //Log.d(TAG, "Request: " + request);
+        if (debug) {
+            Log.d(TAG, "Request: " + request);
+        }
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-//                Log.d(TAG, "Failure: " + request);
-//                Log.d(TAG, "IOException: " + Arrays.toString(e.getStackTrace()));
+                if (debug) {
+                    Log.d(TAG, "-------");
+                    Log.d(TAG, "Failure: " + request);
+                    Log.d(TAG, "IOException: " + Arrays.toString(e.getStackTrace()));
+                    Log.d(TAG, "-------");
+                }
             }
 
             @Override
             public void onResponse(Response response) throws IOException {
-//                Log.d(TAG, "Response: " + response);
-//                Log.d(TAG, "Body: " + response.body().string());
+                if (debug) {
+                    Log.d(TAG, "-------");
+                    Log.d(TAG, "Response: " + response);
+                    Log.d(TAG, "Body: " + response.body().string());
+                    Log.d(TAG, "-------");
+                }
             }
         });
     }

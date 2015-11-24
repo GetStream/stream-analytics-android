@@ -5,7 +5,6 @@ import android.util.Pair;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-import java.util.Map;
 
 public class Impression {
 
@@ -15,7 +14,6 @@ public class Impression {
     private final Integer boost;
     private final String location;
     private final String position;
-    @SerializedName("extra_data") private final Map<String, Object> extraData;
     @SerializedName("features") private final List<Pair<String, String>> features;
 
     private Impression(String[] foreignIds,
@@ -24,7 +22,6 @@ public class Impression {
                        Integer boost,
                        String location,
                        String position,
-                       Map<String, Object> extraData,
                        List<Pair<String, String>> features) {
         this.foreignIds = foreignIds;
         this.feedId = feedId;
@@ -32,7 +29,6 @@ public class Impression {
         this.boost = boost;
         this.location = location;
         this.position = position;
-        this.extraData = extraData;
         this.features = features;
     }
 
@@ -44,7 +40,6 @@ public class Impression {
         private Integer boost;
         private String location;
         private String position;
-        private Map<String, Object> extraData;
         private List<Pair<String, String>> features;
 
         public EventBuilder withForeignIds(final String... foreignIds) {
@@ -77,18 +72,13 @@ public class Impression {
             return this;
         }
 
-        public EventBuilder withExtraData(final Map<String, Object> extraData) {
-            this.extraData = extraData;
-            return this;
-        }
-
         public EventBuilder withFeatures(final List<Pair<String, String>> features) {
             this.features = features;
             return this;
         }
 
         public Impression build() {
-            return new Impression(foreignIds, feedId, userId, boost, location, position, extraData, features);
+            return new Impression(foreignIds, feedId, userId, boost, location, position, features);
         }
     }
 }

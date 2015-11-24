@@ -9,6 +9,8 @@ import io.getstream.analytics.beans.Impression;
  */
 public interface AnalyticsRepository {
 
+	void setDebug(boolean debug);
+
 	void sendEngagement(String jsonPayload);
 	void sendEngagement(Engagement engagement);
 	void sendImpression(String jsonPayload);

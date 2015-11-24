@@ -27,6 +27,10 @@ public final class StreamAnalytics {
 		return instance;
 	}
 
+	public void setDebug(boolean debug) {
+		this.repository.setDebug(debug);
+	}
+
 	public void send(Engagement engagement) {
 		repository.sendEngagement(engagement);
 	}
@@ -35,19 +39,13 @@ public final class StreamAnalytics {
 		repository.sendImpression(impression);
 	}
 
+	// Used by service
 	public void handleActionEngagement(String jsonPayload) {
 		repository.sendEngagement(jsonPayload);
 	}
 
-	public void handleActionEngagement(Engagement engagement) {
-		repository.sendEngagement(engagement);
-	}
-
+	// Used by service
 	public void handleActionImpression(String jsonPayload) {
 		repository.sendImpression(jsonPayload);
-	}
-
-	public void handleActionImpression(Impression impression) {
-		repository.sendImpression(impression);
 	}
 }
