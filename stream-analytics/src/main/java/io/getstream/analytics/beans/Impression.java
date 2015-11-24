@@ -1,7 +1,5 @@
 package io.getstream.analytics.beans;
 
-import android.util.Pair;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -14,7 +12,7 @@ public class Impression {
     private final Integer boost;
     private final String location;
     private final String position;
-    @SerializedName("features") private final List<Pair<String, String>> features;
+    @SerializedName("features") private final List<Feature> features;
 
     private Impression(String[] foreignIds,
                        String feedId,
@@ -22,7 +20,7 @@ public class Impression {
                        Integer boost,
                        String location,
                        String position,
-                       List<Pair<String, String>> features) {
+                       List<Feature> features) {
         this.foreignIds = foreignIds;
         this.feedId = feedId;
         this.userId = userId;
@@ -40,7 +38,7 @@ public class Impression {
         private Integer boost;
         private String location;
         private String position;
-        private List<Pair<String, String>> features;
+        private List<Feature> features;
 
         public EventBuilder withForeignIds(final String... foreignIds) {
             this.foreignIds = foreignIds;
@@ -72,7 +70,7 @@ public class Impression {
             return this;
         }
 
-        public EventBuilder withFeatures(final List<Pair<String, String>> features) {
+        public EventBuilder withFeatures(final List<Feature> features) {
             this.features = features;
             return this;
         }

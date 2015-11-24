@@ -6,10 +6,10 @@
 
     <groupId>io.getstream.analytics</groupId>
     <artifactId>stream-analytics-android</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>stream-analytics</name>
-    <description>sstream-analytics is a Java client for http://getstream.io.</description>
+    <description>stream-analytics is a Java client for http://getstream.io.</description>
     <url>https://github.com/GetStream/stream-analytics-android</url>
 
     <licenses>
