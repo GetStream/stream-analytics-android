@@ -13,6 +13,9 @@ android {
             //consumerProguardFiles 'proguard-rules.txt'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {

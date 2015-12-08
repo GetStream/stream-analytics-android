@@ -22,8 +22,10 @@ android {
             //minifyEnabled true
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
-
 dependencies {
     compile project(':stream-analytics')
 

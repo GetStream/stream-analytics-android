@@ -1,8 +1,15 @@
-language: java
+language: android
+
 jdk:
   - oraclejdk7
   - openjdk7
   - openjdk6
+
+android:
+  components:
+    - build-tools-23.0.1
+    - android-23
+    - extra
 
 env:
   - TERM=dumb
