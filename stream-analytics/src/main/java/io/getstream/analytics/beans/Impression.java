@@ -1,8 +1,12 @@
 package io.getstream.analytics.beans;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import io.getstream.analytics.service.StreamAnalytics;
 
 public class Impression {
 
@@ -23,7 +27,7 @@ public class Impression {
                        List<Feature> features) {
         this.foreignIds = foreignIds;
         this.feedId = feedId;
-        this.userId = userId;
+        this.userId = userId != null ? userId : StreamAnalytics.getInstance().getUserId();
         this.boost = boost;
         this.location = location;
         this.position = position;

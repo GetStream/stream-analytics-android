@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import io.getstream.analytics.service.StreamAnalytics;
+
 public class Engagement {
 
     @SerializedName("foreign_id") private final String foreignId;
@@ -30,7 +32,7 @@ public class Engagement {
         this.feedId = feedId;
         this.label = label;
         this.score = score;
-        this.userId = userId;
+        this.userId = userId != null ? userId : StreamAnalytics.getInstance().getUserId();
         this.boost = boost;
         this.location = location;
         this.position = position;

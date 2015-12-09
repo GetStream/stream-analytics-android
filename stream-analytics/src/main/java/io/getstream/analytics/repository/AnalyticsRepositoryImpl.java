@@ -44,6 +44,7 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 	private final HttpUrl impressionEndpoint;
 
     private boolean debug = false;
+    private String userId = null;
 
 	public AnalyticsRepositoryImpl(final OkHttpClient client, StreamAnalyticsAuth analyticsAuth) {
         this.client = client;
@@ -55,6 +56,14 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 				newBuilder().addPathSegment(IMPRESSION_PATH_PARAM).addQueryParameter(PARAM_API_KEY,
                 analyticsAuth.getApiKey()).build();
 	}
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
 
     @Override
     public void setDebug(boolean debug) {

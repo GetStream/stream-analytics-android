@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import io.getstream.analytics.beans.Engagement;
 import io.getstream.analytics.beans.Feature;
@@ -26,21 +25,20 @@ public class SimpleActivity extends Activity {
                 getString(R.string.auth_api_token)
         );
         mStreamAnalytics = StreamAnalytics.getInstance(auth);
+        mStreamAnalytics.setUserId("486892");
         mStreamAnalytics.setDebug(BuildConfig.DEBUG);
     }
 
     public void trackImpression(View view) {
         ArrayList<Feature> features = new ArrayList<>();
-        features.add(new Feature("hello", "world"));
-        features.add(new Feature("more", "streams"));
+        features.add(new Feature("topic", "coffee"));
 
         mStreamAnalytics.send(new Impression.EventBuilder()
                         .withForeignIds(new String[]{"message:34349698", "message:34349699"})
                         .withFeedId("user:ChartMill")
-                        .withUserId("tom")
                         .withBoost(1)
-                        .withLocation("Amsterdam")
-                        .withPosition(SimpleActivity.class.getSimpleName())
+                        .withLocation("homepage")
+                        .withPosition("1")
                         .withFeatures(features)
                         .build()
         );
@@ -48,18 +46,16 @@ public class SimpleActivity extends Activity {
 
     public void trackEngagement(View view) {
         ArrayList<Feature> features = new ArrayList<>();
-        features.add(new Feature("hello", "world"));
-        features.add(new Feature("more", "streams"));
+        features.add(new Feature("topic", "tea"));
 
         mStreamAnalytics.send(new Engagement.EventBuilder()
                         .withForeignId("message:34349698")
                         .withFeedId("user:ChartMill")
                         .withLabel("Engagement click")
-                        .withUserId("tom")
                         .withScore(1d)
                         .withBoost(1)
-                        .withLocation("Amsterdam")
-                        .withPosition(SimpleActivity.class.getSimpleName())
+                        .withLocation("homepage")
+                        .withPosition("0")
                         .withFeatures(features)
                         .build()
         );

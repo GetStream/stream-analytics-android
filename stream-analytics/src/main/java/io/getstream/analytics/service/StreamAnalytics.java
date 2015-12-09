@@ -16,6 +16,13 @@ public final class StreamAnalytics {
 		this.repository = new AnalyticsRepositoryImpl(new StreamAnalyticsClient().newClient(), auth);
 	}
 
+	public static StreamAnalytics getInstance() throws IllegalStateException {
+		if (instance == null) {
+			throw new IllegalStateException("No instance created yet - Please initialize with StreamAnalytics.getInstance(StreamAnalyticsAuth auth) first");
+		}
+		return instance;
+	}
+
 	public static StreamAnalytics getInstance(StreamAnalyticsAuth auth) {
 		if (instance == null) {
 			synchronized(StreamAnalytics.class) {
@@ -25,6 +32,14 @@ public final class StreamAnalytics {
 			}
 		}
 		return instance;
+	}
+
+	public void setUserId(String userId) {
+		this.repository.setUserId(userId);
+	}
+
+	public String getUserId() {
+		return this.repository.getUserId();
 	}
 
 	public void setDebug(boolean debug) {
