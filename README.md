@@ -4,13 +4,15 @@
 
 ## How to use it
 
-### Get the latest release of the client: https://github.com/GetStream/stream-analytics-android/releases/
+### Download the client:
+
+Releases are listed here: https://github.com/GetStream/stream-analytics-android/releases/
 
 ### Import the library in your gradle project:
 
 ```
     dependencies {
-        compile files('/path_to_file/stream-analytics-1.0-SNAPSHOT.jar')
+        compile files('/path_to_file/stream-analytics-release-1.0.aar')
     }
 ```
 
@@ -19,7 +21,7 @@ required dependencies:
 
 ```
     dependencies {
-        compile files('/path_to_file/stream-analytics-1.0-SNAPSHOT-jar-with-dependencies.jar')
+        compile files('/path_to_file/stream-analytics-release-1.0-with-dependencies.aar')
     }
 ```
 
