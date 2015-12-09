@@ -24,5 +24,6 @@ deploy:
   api_key:
     secure: n3op61XXuVITuX/rPKGGXH7cg1/x4iLIpJwB5vVsQzbWiqiohwXEVUB3+p2ULpxWNUcFxkpUqpU5bQcb3iS1n2YeJJvdSbr+/ZHX1zao0UdzyETBiAb8bwkVuUGuYGfnP5ZRjL612KiYYuG///FUCI4a56LaN/4H8n3k7Q2+1Hv9igKq1BqVQ82K++hvq2qi/qNAOLOnBJAKz6PB+PoZSbRkrDJsmCibCgZENy7c2WPMeztGlCm2hWSzG89YgQSckAXKrCw/izjsSGjLPNDIYupxbERZLq6pWdqDixfLJ8tRdfKWBkptGcwjZO30CqZAm9iX0uXLzTrDt3c+X2Ei0UehQp9zeyBb/CF9OokT2uVdXdlAPKSkbxh+HfjfID/5TIyjXJnbr2gMItjaW1RncsQxBl6OqzdavJ1s4UGSmGslpYtheASfBj42VnAGFRJVuW2Rsc7ylqSDAWWGfIRjXfhvJuVXa8dN0TviSYOSaIOyChthD9aQ8OL7F20wcTH71MJQcutVMjn9/Bl+lwotZmvWu80FL/MFYznZJXsvJFYOed40SwVDOe4nk07vCQzmkBhI7RZ0f0qlpA+/0CxWHO/UERDS4HHfwD/HNifEmu3f2umsyuFQa2WvYvBpbW/TTOQf69iBzA2kjiFpKa0JzvyGDHH+Rf7L8xbkSBJWx+A=
   file: $(git ls-files -o | grep stream-analytics/build/outputs/aar/stream-analytics-release | grep .aar | head -n 1)
+  skip_cleanup: true
   on:
-    repo: GetStream/stream-analytics-android
+    tags: true
