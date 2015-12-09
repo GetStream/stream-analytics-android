@@ -1,7 +1,12 @@
-How to use it
--------------
+# GetStream Android Analytics Client
 
-Import the library in your gradle project:
+[![Build Status](https://travis-ci.org/GetStream/stream-analytics-android.svg?branch=master)](https://travis-ci.org/GetStream/stream-analytics-android)
+
+## How to use it
+
+### Get the latest release of the client: https://github.com/GetStream/stream-analytics-android/releases/
+
+### Import the library in your gradle project:
 
 ```
     dependencies {
@@ -18,7 +23,7 @@ required dependencies:
     }
 ```
 
-Bind the service in your application's manifest.xml as shown below:
+### Bind the service in your application's manifest.xml
 
 ```xml
  <service
