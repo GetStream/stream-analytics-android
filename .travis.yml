@@ -6,15 +6,23 @@ android:
   - extra
 matrix:
   include:
-    - jdk: openjdk7
-    - jdk: oraclejdk7
-      env:
-          - secure: SZUqCRNSM4HXF5Pll0K6mpa8YxGgELKXA/rHLo8JetMtfRZc9ZUmnH9gOlUIeipljZhbhUkNhTicbbpWqytLhdnKrG2kNeORk8UYegsbc/iJRgQVJHyR0eoC+ocmhghB1NUf3ZrjTzlbKCJ38uSFcGK3/b+oB7NbzY724MUGKeVP2TS0ypqQQPQWvgd9FoLI5JIw6hvOnNA3NEPGYWMZYDJG+A3l0BSDzZYCvAkdrv6WTHN/HavDgazjnWLjTLro7qw99IS05Ac+01IQwCafj7MQWvoZeVVQRFqR7s9BtvlFp+8BkUZzYZNrWQfqQ6qfZtQq0+Qr2neC4JAw98jdZ1LsBbFqsDZI19AE92apvwG8yIVqUgOcBf4/jopek5lLMp5Bk9UwX6JSdfKWHeqq/C9+bxERkYeOiOr1pEFdGJMFXc5O05iBGaUYWRusvYd+saNKg9mHu2aazi283VU7qWwyUdOWC/TITbn+1M1RZ0DvM58sUysKFwroaLLoIrZHtS5ASPJvL9TURCw0da0+Iz9MaDaebenFhfW5CygWmKR2tQh2dUf66Oc6O4pH4JM8cNKM82dzH5j098/gq6fXh3kkay2emh8Nw9p0y0ESXc6z/z3cSe1CPhvXM9ij2Rfti6nZm7Seu28Fv8nPbfJ29qwyObHDqSfWkx36lXCVzVQ=
-          - secure: QJoYBng9KaRlL/RC0tZSFduWXivHPZ54MpryozuXxvFXHWup+snWroGZyOYkQEeUrlAwc91+q+POPU1jYck1jy4u7JJ+CPtYZki3mLkr4qIiJzO7yn1rOWW4i36vtYfY86sdXmmvD2knbP4wuGZnjhf3jhXnMkaP4v+ngAmBRHhEhTTLO9cz2v8/xOp/9XqiZJaW2/tF4aywKt8X308bbO0mRqjcNC1hsqU3g0s6/+VFmWSLHihJ/Bz5P/vytS2xLTg1mmwh4ybrXXPcmPV/LAXBVbdQmMc+kqNHGUJRGpEJdgFa/fm3Z2lk8Farwg8LJ0SLCzQHSekxYxgt/mC59h1LbTiVKVNDspS+AV+tHo4qXK7vY9t7w5BHHwaN8WwG/V2gg7FjkIeReIcZNtpQaQ5N7mEV/4bEoZVxk+JhVL2obcjSceiEhCV2DDCpjbemn2/Nl+HXrVmHWdTTtJAlYAYQ0Gv6zDiLs0sR6gj8GhHcy24+vaNIdD4meiEHHLQKb2Y1cyKuykWeL5VnvulLpVNvf+lofhDFAdxj6aijhdCTGA89TzD/5C9CGRXUKWjfhzFh2XSMk8Kx85zDe5FAQMCmtxmyGQ0qcv/9LMUH9TACoQekkBeuvQd+RffQ3UNXWlkhYRJftgPhlQ6jnr4xGsiAG5wUtOsCPIJX+7+eFGs=
-          - secure: xXTS7SQXcH2vVHeu0uG5CpBZFeMhU6/9ugyFakhR9ebI4VO/Ybl20ZvRCmvvu/F8Q0J1fjZKD5b6SOY3HOKoWO8vnyUmd6osF6QVl/QpRYBInEejAsW+y6GcvXQ6b+kM/tSjmRSdV0vGX6lYunJLBfZcNU3bNsRl94N5qxFLFZZJQ2vGoxJToHXdZIZCltpkma8VayoKe5mjkY9ShvZyVtyBL5XBxdL5UXopd1/BCFB0hoQwIPGDsgpjKlBCNqS9XGt5X29e3tP80fGb2eFfY9O4DPxw5E/ZQRNmX7RhQ3TNjrzJqYGfU1NDoZFftAqc9L39J/aEbT7Fm/OL0dUlWKcKZJRJqfcMMrqb+fSezSlVbxFM7XKu/POnbCvZ3ND/sZqzqnZ0EV6ydzkL1sEHpFk+v/036MOkb+zqIKbqpxH6OjtoHv+yMV6781fUXr6I0u5J1RU3YS85AzlsXF6ELrUbpRqnVgPFohmLOXvoSTxz4vkir+AzG7/07v6yARjV11Yc+XTX3RfVd6IgPcVy0ldac2wAYRP4aFDHpLCT7b2QmfIayYcmwLjiArYgVoVDGB/B22YZdYUBwTVpG5F05YlKAb+43BECmnIWSxCn49R3SGb+kVKWT3jujdcZn6HO5PSc/guSSH/NkQ6uFIxBs8M8l3pwKm2EXtE4i1VUmuo=
-      addons:
-        artifacts:
-          paths:
-          - $(git ls-files -o | grep stream-analytics/build/outputs/aar/stream-analytics-release | tr "\n" ":")
+  - jdk: openjdk7
+  - jdk: oraclejdk7
+    env:
+    - secure: SZUqCRNSM4HXF5Pll0K6mpa8YxGgELKXA/rHLo8JetMtfRZc9ZUmnH9gOlUIeipljZhbhUkNhTicbbpWqytLhdnKrG2kNeORk8UYegsbc/iJRgQVJHyR0eoC+ocmhghB1NUf3ZrjTzlbKCJ38uSFcGK3/b+oB7NbzY724MUGKeVP2TS0ypqQQPQWvgd9FoLI5JIw6hvOnNA3NEPGYWMZYDJG+A3l0BSDzZYCvAkdrv6WTHN/HavDgazjnWLjTLro7qw99IS05Ac+01IQwCafj7MQWvoZeVVQRFqR7s9BtvlFp+8BkUZzYZNrWQfqQ6qfZtQq0+Qr2neC4JAw98jdZ1LsBbFqsDZI19AE92apvwG8yIVqUgOcBf4/jopek5lLMp5Bk9UwX6JSdfKWHeqq/C9+bxERkYeOiOr1pEFdGJMFXc5O05iBGaUYWRusvYd+saNKg9mHu2aazi283VU7qWwyUdOWC/TITbn+1M1RZ0DvM58sUysKFwroaLLoIrZHtS5ASPJvL9TURCw0da0+Iz9MaDaebenFhfW5CygWmKR2tQh2dUf66Oc6O4pH4JM8cNKM82dzH5j098/gq6fXh3kkay2emh8Nw9p0y0ESXc6z/z3cSe1CPhvXM9ij2Rfti6nZm7Seu28Fv8nPbfJ29qwyObHDqSfWkx36lXCVzVQ=
+    - secure: QJoYBng9KaRlL/RC0tZSFduWXivHPZ54MpryozuXxvFXHWup+snWroGZyOYkQEeUrlAwc91+q+POPU1jYck1jy4u7JJ+CPtYZki3mLkr4qIiJzO7yn1rOWW4i36vtYfY86sdXmmvD2knbP4wuGZnjhf3jhXnMkaP4v+ngAmBRHhEhTTLO9cz2v8/xOp/9XqiZJaW2/tF4aywKt8X308bbO0mRqjcNC1hsqU3g0s6/+VFmWSLHihJ/Bz5P/vytS2xLTg1mmwh4ybrXXPcmPV/LAXBVbdQmMc+kqNHGUJRGpEJdgFa/fm3Z2lk8Farwg8LJ0SLCzQHSekxYxgt/mC59h1LbTiVKVNDspS+AV+tHo4qXK7vY9t7w5BHHwaN8WwG/V2gg7FjkIeReIcZNtpQaQ5N7mEV/4bEoZVxk+JhVL2obcjSceiEhCV2DDCpjbemn2/Nl+HXrVmHWdTTtJAlYAYQ0Gv6zDiLs0sR6gj8GhHcy24+vaNIdD4meiEHHLQKb2Y1cyKuykWeL5VnvulLpVNvf+lofhDFAdxj6aijhdCTGA89TzD/5C9CGRXUKWjfhzFh2XSMk8Kx85zDe5FAQMCmtxmyGQ0qcv/9LMUH9TACoQekkBeuvQd+RffQ3UNXWlkhYRJftgPhlQ6jnr4xGsiAG5wUtOsCPIJX+7+eFGs=
+    - secure: xXTS7SQXcH2vVHeu0uG5CpBZFeMhU6/9ugyFakhR9ebI4VO/Ybl20ZvRCmvvu/F8Q0J1fjZKD5b6SOY3HOKoWO8vnyUmd6osF6QVl/QpRYBInEejAsW+y6GcvXQ6b+kM/tSjmRSdV0vGX6lYunJLBfZcNU3bNsRl94N5qxFLFZZJQ2vGoxJToHXdZIZCltpkma8VayoKe5mjkY9ShvZyVtyBL5XBxdL5UXopd1/BCFB0hoQwIPGDsgpjKlBCNqS9XGt5X29e3tP80fGb2eFfY9O4DPxw5E/ZQRNmX7RhQ3TNjrzJqYGfU1NDoZFftAqc9L39J/aEbT7Fm/OL0dUlWKcKZJRJqfcMMrqb+fSezSlVbxFM7XKu/POnbCvZ3ND/sZqzqnZ0EV6ydzkL1sEHpFk+v/036MOkb+zqIKbqpxH6OjtoHv+yMV6781fUXr6I0u5J1RU3YS85AzlsXF6ELrUbpRqnVgPFohmLOXvoSTxz4vkir+AzG7/07v6yARjV11Yc+XTX3RfVd6IgPcVy0ldac2wAYRP4aFDHpLCT7b2QmfIayYcmwLjiArYgVoVDGB/B22YZdYUBwTVpG5F05YlKAb+43BECmnIWSxCn49R3SGb+kVKWT3jujdcZn6HO5PSc/guSSH/NkQ6uFIxBs8M8l3pwKm2EXtE4i1VUmuo=
+    addons:
+      artifacts:
+        paths:
+        - $(git ls-files -o | grep stream-analytics/build/outputs/aar/stream-analytics-release | tr "\n" ":")
+
 script:
 - "./gradlew assembleRelease"
+deploy:
+  provider: releases
+  api_key:
+    secure: n3op61XXuVITuX/rPKGGXH7cg1/x4iLIpJwB5vVsQzbWiqiohwXEVUB3+p2ULpxWNUcFxkpUqpU5bQcb3iS1n2YeJJvdSbr+/ZHX1zao0UdzyETBiAb8bwkVuUGuYGfnP5ZRjL612KiYYuG///FUCI4a56LaN/4H8n3k7Q2+1Hv9igKq1BqVQ82K++hvq2qi/qNAOLOnBJAKz6PB+PoZSbRkrDJsmCibCgZENy7c2WPMeztGlCm2hWSzG89YgQSckAXKrCw/izjsSGjLPNDIYupxbERZLq6pWdqDixfLJ8tRdfKWBkptGcwjZO30CqZAm9iX0uXLzTrDt3c+X2Ei0UehQp9zeyBb/CF9OokT2uVdXdlAPKSkbxh+HfjfID/5TIyjXJnbr2gMItjaW1RncsQxBl6OqzdavJ1s4UGSmGslpYtheASfBj42VnAGFRJVuW2Rsc7ylqSDAWWGfIRjXfhvJuVXa8dN0TviSYOSaIOyChthD9aQ8OL7F20wcTH71MJQcutVMjn9/Bl+lwotZmvWu80FL/MFYznZJXsvJFYOed40SwVDOe4nk07vCQzmkBhI7RZ0f0qlpA+/0CxWHO/UERDS4HHfwD/HNifEmu3f2umsyuFQa2WvYvBpbW/TTOQf69iBzA2kjiFpKa0JzvyGDHH+Rf7L8xbkSBJWx+A=
+  file: $(git ls-files -o | grep stream-analytics/build/outputs/aar/stream-analytics-release | grep .aar | head -n 1)
+  on:
+    repo: GetStream/stream-analytics-android
