@@ -8,18 +8,25 @@ import io.getstream.analytics.service.StreamAnalytics;
 
 public class Engagement {
 
-    @SerializedName("foreign_id") private final String foreignId;
-    @SerializedName("feed_id") private final String feedId;
+    private final ContentElement content;
+
+    @SerializedName("feed_id")
+    private final String feedId;
+
     private final String label;
     private final Double score;
-    @SerializedName("user_id") private final String userId;
+
+    @SerializedName("user_id")
+    private final String userId;
+
     private final Integer boost;
     private final String location;
     private final String position;
-    @SerializedName("features") private final List<Feature> features;
 
+    @SerializedName("features")
+    private final List<Feature> features;
 
-    private Engagement(final String foreignId,
+    private Engagement(final ContentElement content,
                        final String feedId,
                        final String label,
                        final Double score,
@@ -28,11 +35,11 @@ public class Engagement {
                        String location,
                        String position,
                        List<Feature> features) {
-        this.foreignId = foreignId;
+        this.content = content;
         this.feedId = feedId;
         this.label = label;
         this.score = score;
-        this.userId = userId != null ? userId : StreamAnalytics.getInstance().getUserId();
+        this.userId = userId;
         this.boost = boost;
         this.location = location;
         this.position = position;
@@ -41,7 +48,7 @@ public class Engagement {
 
     public static class EventBuilder {
 
-        private String foreignId;
+        private String content;
         private String feedId;
         private String label;
         private Double score;
@@ -52,7 +59,7 @@ public class Engagement {
         private List<Feature> features;
 
         public EventBuilder withForeignId(final String foreignId) {
-            this.foreignId = foreignId;
+            this.content = foreignId;
             return this;
         }
 
@@ -97,7 +104,17 @@ public class Engagement {
         }
 
         public Engagement build() {
-            return new Engagement(foreignId, feedId, label, score, userId, boost, location, position, features);
+            return new Engagement(new ContentElement(content), feedId, label, score, userId != null ? userId : StreamAnalytics.getInstance().getUserId(),
+                    boost, location, position, features);
+        }
+    }
+
+    protected static class ContentElement {
+        @SerializedName("foreign_id")
+        private final String foreignId;
+
+        public ContentElement(String foreignId) {
+            this.foreignId = foreignId;
         }
     }
 }

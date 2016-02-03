@@ -45,8 +45,9 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 
     private boolean debug = false;
     private String userId = null;
+    private String alias = null;
 
-	public AnalyticsRepositoryImpl(final OkHttpClient client, StreamAnalyticsAuth analyticsAuth) {
+    public AnalyticsRepositoryImpl(final OkHttpClient client, StreamAnalyticsAuth analyticsAuth) {
         this.client = client;
         this.authToken = analyticsAuth.getAuthToken();
         this.engagementEndpoint = HttpUrl.parse(BASE_ENDPOINT).
@@ -63,6 +64,14 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 
     public String getUserId() {
         return userId;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getAlias() {
+        return alias;
     }
 
     @Override

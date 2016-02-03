@@ -34,8 +34,17 @@ public final class StreamAnalytics {
 		return instance;
 	}
 
+	public void setUser(String userId, String alias) {
+		this.setUserId(userId);
+		this.setAlias(alias);
+	}
+
 	public void setUserId(String userId) {
 		this.repository.setUserId(userId);
+	}
+
+	public void setAlias(String alias) {
+		this.repository.setAlias(alias);
 	}
 
 	public String getUserId() {

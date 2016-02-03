@@ -34,7 +34,7 @@ public class SimpleActivity extends Activity {
         features.add(new Feature("topic", "coffee"));
 
         mStreamAnalytics.send(new Impression.EventBuilder()
-                        .withForeignIds(new String[]{"message:34349698", "message:34349699"})
+                        .withContentList(new String[]{"message:34349698", "message:34349699"})
                         .withFeedId("user:ChartMill")
                         .withBoost(1)
                         .withLocation("homepage")

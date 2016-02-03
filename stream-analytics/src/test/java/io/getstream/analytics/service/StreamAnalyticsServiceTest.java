@@ -45,7 +45,7 @@ public class StreamAnalyticsServiceTest {
 		Intent intent = new Intent(context, StreamAnalyticsService.class);
 		intent.setAction(StreamAnalyticsService.ACTION_IMPRESSION);
 		intent.putExtra(StreamAnalyticsService.EXTRA_PAYLOAD, GSON.toJson(
-				new Impression.EventBuilder().withForeignIds("1", "2").withFeedId("1").build()
+				new Impression.EventBuilder().withContentList("1", "2").withFeedId("1").build()
 		));
 
 		streamAnalyticsService.onHandleIntent(intent);
