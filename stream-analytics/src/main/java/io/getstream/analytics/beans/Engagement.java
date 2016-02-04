@@ -2,13 +2,11 @@ package io.getstream.analytics.beans;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
-
-import io.getstream.analytics.service.StreamAnalytics;
+import java.util.Map;
 
 public class Engagement {
-
-    private final ContentElement content;
 
     @SerializedName("feed_id")
     private final String feedId;
@@ -16,8 +14,8 @@ public class Engagement {
     private final String label;
     private final Double score;
 
-    @SerializedName("user_id")
-    private final String userId;
+    @SerializedName("user_data")
+    private final UserData userData;
 
     private final Integer boost;
     private final String location;
@@ -26,40 +24,47 @@ public class Engagement {
     @SerializedName("features")
     private final List<Feature> features;
 
-    private Engagement(final ContentElement content,
+    private final Map<String, Serializable> content;
+
+    private Engagement(final UserData userData,
                        final String feedId,
                        final String label,
                        final Double score,
-                       final String userId,
                        Integer boost,
                        String location,
                        String position,
-                       List<Feature> features) {
-        this.content = content;
+                       List<Feature> features,
+                       final Map<String, Serializable> content) {
+        this.userData = userData;
         this.feedId = feedId;
         this.label = label;
         this.score = score;
-        this.userId = userId;
         this.boost = boost;
         this.location = location;
         this.position = position;
         this.features = features;
+        this.content = content;
     }
 
     public static class EventBuilder {
 
-        private String content;
+        private UserData userData;
         private String feedId;
         private String label;
         private Double score;
-        private String userId;
         private Integer boost;
         private String location;
         private String position;
         private List<Feature> features;
+        private Content content;
 
-        public EventBuilder withForeignId(final String foreignId) {
-            this.content = foreignId;
+        public EventBuilder withUserId(final String id) {
+            this.userData = new UserData(id);
+            return this;
+        }
+
+        public EventBuilder withUser(final String id, final String alias) {
+            this.userData = new UserData(id, alias);
             return this;
         }
 
@@ -78,13 +83,13 @@ public class Engagement {
             return this;
         }
 
-        public EventBuilder withUserId(final String userId) {
-            this.userId = userId;
+        public EventBuilder withBoost(final Integer boost) {
+            this.boost = boost;
             return this;
         }
 
-        public EventBuilder withBoost(final Integer boost) {
-            this.boost = boost;
+        public EventBuilder withContent(final Content content) {
+            this.content = content;
             return this;
         }
 
@@ -104,17 +109,8 @@ public class Engagement {
         }
 
         public Engagement build() {
-            return new Engagement(new ContentElement(content), feedId, label, score, userId != null ? userId : StreamAnalytics.getInstance().getUserId(),
-                    boost, location, position, features);
-        }
-    }
-
-    protected static class ContentElement {
-        @SerializedName("foreign_id")
-        private final String foreignId;
-
-        public ContentElement(String foreignId) {
-            this.foreignId = foreignId;
+            return new Engagement(userData, feedId, label, score, boost, location, position, features,
+                    content == null ? null : content.getContent());
         }
     }
 }

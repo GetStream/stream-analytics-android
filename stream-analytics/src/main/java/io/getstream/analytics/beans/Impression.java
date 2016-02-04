@@ -2,7 +2,6 @@ package io.getstream.analytics.beans;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import io.getstream.analytics.service.StreamAnalytics;
 public class Impression {
 
     @SerializedName("content_list")
-    private final List<ContentElement> contentList;
+    private final List<Content> contentList;
 
     @SerializedName("feed_id")
     private final String feedId;
@@ -26,7 +25,7 @@ public class Impression {
     @SerializedName("features")
     private final List<Feature> features;
 
-    private Impression(List<ContentElement> contentList,
+    private Impression(List<Content> contentList,
                        String feedId,
                        String userId,
                        Integer boost,
@@ -35,7 +34,7 @@ public class Impression {
                        List<Feature> features) {
         this.contentList = contentList;
         this.feedId = feedId;
-        this.userId = userId != null ? userId : StreamAnalytics.getInstance().getUserId();
+        this.userId = userId;
         this.boost = boost;
         this.location = location;
         this.position = position;
@@ -44,7 +43,7 @@ public class Impression {
 
     public static class EventBuilder {
 
-        private List<String> contentList;
+        private List<Content> contentList;
         private String feedId;
         private String userId;
         private Integer boost;
@@ -52,13 +51,13 @@ public class Impression {
         private String position;
         private List<Feature> features;
 
-        public EventBuilder withContentList(final String... foreignIds) {
-            this.contentList = Arrays.asList(foreignIds);
+        public EventBuilder withContentList(final Content... content) {
+            this.contentList = Arrays.asList(content);
             return this;
         }
 
-        public EventBuilder withContentList(final List<String> foreignIds) {
-            this.contentList = foreignIds;
+        public EventBuilder withContentList(final List<Content> contents) {
+            this.contentList = contents;
             return this;
         }
 
@@ -69,6 +68,11 @@ public class Impression {
 
         public EventBuilder withUserId(final String userId) {
             this.userId = userId;
+            return this;
+        }
+
+        public EventBuilder withDefaultUserId() {
+            this.userId = StreamAnalytics.getInstance().getUserId();
             return this;
         }
 
@@ -93,20 +97,7 @@ public class Impression {
         }
 
         public Impression build() {
-            List<ContentElement> elements = new ArrayList<>();
-            for (String foreignId : contentList) {
-                elements.add(new ContentElement(foreignId));
-            }
-            return new Impression(elements, feedId, userId, boost, location, position, features);
-        }
-    }
-
-    protected static class ContentElement {
-        @SerializedName("foreign_id")
-        private final String foreignId;
-
-        public ContentElement(String foreignId) {
-            this.foreignId = foreignId;
+            return new Impression(contentList, feedId, userId, boost, location, position, features);
         }
     }
 }

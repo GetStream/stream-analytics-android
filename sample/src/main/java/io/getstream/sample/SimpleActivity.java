@@ -6,6 +6,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import io.getstream.analytics.beans.Content;
 import io.getstream.analytics.beans.Engagement;
 import io.getstream.analytics.beans.Feature;
 import io.getstream.analytics.beans.Impression;
@@ -34,7 +35,14 @@ public class SimpleActivity extends Activity {
         features.add(new Feature("topic", "coffee"));
 
         mStreamAnalytics.send(new Impression.EventBuilder()
-                        .withContentList(new String[]{"message:34349698", "message:34349699"})
+                        .withContentList(
+                                new Content.ContentBuilder()
+                                        .withForeignId("message:34349698")
+                                        .build(),
+                                new Content.ContentBuilder()
+                                        .withForeignId("message:34349699")
+                                        .build()
+                        )
                         .withFeedId("user:ChartMill")
                         .withBoost(1)
                         .withLocation("homepage")
@@ -49,7 +57,7 @@ public class SimpleActivity extends Activity {
         features.add(new Feature("topic", "tea"));
 
         mStreamAnalytics.send(new Engagement.EventBuilder()
-                        .withForeignId("message:34349698")
+                        .withContent(new Content.ContentBuilder().withForeignId("message:34349698").build())
                         .withFeedId("user:ChartMill")
                         .withLabel("Engagement click")
                         .withScore(1d)
