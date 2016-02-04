@@ -2,15 +2,17 @@ package io.getstream.analytics.beans;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import io.getstream.analytics.service.StreamAnalytics;
 
 public class Impression {
 
     @SerializedName("content_list")
-    private final List<Content> contentList;
+    private final List<Map<String, Serializable>> contentList;
 
     @SerializedName("feed_id")
     private final String feedId;
@@ -25,7 +27,7 @@ public class Impression {
     @SerializedName("features")
     private final List<Feature> features;
 
-    private Impression(List<Content> contentList,
+    private Impression(List<Map<String, Serializable>> contentList,
                        String feedId,
                        String userId,
                        Integer boost,
@@ -43,7 +45,7 @@ public class Impression {
 
     public static class EventBuilder {
 
-        private List<Content> contentList;
+        private List<Map<String, Serializable>> contentList = new ArrayList<>();
         private String feedId;
         private String userId;
         private Integer boost;
@@ -51,13 +53,17 @@ public class Impression {
         private String position;
         private List<Feature> features;
 
-        public EventBuilder withContentList(final Content... content) {
-            this.contentList = Arrays.asList(content);
+        public EventBuilder withContentList(final Content... contents) {
+            for (Content contentElement : contents) {
+                contentList.add(contentElement.getContent());
+            }
             return this;
         }
 
         public EventBuilder withContentList(final List<Content> contents) {
-            this.contentList = contents;
+            for (Content contentElement : contents) {
+                contentList.add(contentElement.getContent());
+            }
             return this;
         }
 

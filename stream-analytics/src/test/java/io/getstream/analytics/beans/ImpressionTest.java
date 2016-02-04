@@ -29,6 +29,14 @@ public class ImpressionTest {
         System.out.println(gson.toJson(impression));
     }
 
+    @Test
+    public void shouldCreateImpressionWithoutContent() {
+        Impression impression = new Impression.EventBuilder()
+                .withFeedId("1")
+                .build();
+        System.out.println(gson.toJson(impression));
+    }
+
     @Test(expected = RuntimeException.class)
     public void shouldFailCreatingImpression() {
         Impression impression = new Impression.EventBuilder()
