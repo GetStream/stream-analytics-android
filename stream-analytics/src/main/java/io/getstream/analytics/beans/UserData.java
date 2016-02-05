@@ -28,44 +28,41 @@
  either expressed or implied, of the FreeBSD Project.
 
  */
-package io.getstream.analytics.service;
-
-import io.getstream.analytics.beans.Engagement;
-import io.getstream.analytics.beans.Impression;
+package io.getstream.analytics.beans;
 
 /**
- * Provide methods to send out events for Engagement and Impression tracking.
+ * Helper class used to handle serialization/deserialization of the "user_data" field.
  */
-public interface StreamAnalytics {
+public class UserData {
 
-    /**
-     * Set user data.
-     * @param userId User data
-     * @param alias User id
-     */
-    void setUser(String userId, String alias);
+    private String id;
+    private String alias;
 
-    /**
-     * Set user id.
-     * @param userId user id
-     */
-	void setUserId(String userId);
+    public UserData(String id, String alias) {
+        this.id = id;
+        this.alias = alias;
+    }
 
-    /**
-     * Enable/disable the debug mode.
-     * @param debug True if you want to enable th debug mode, false otherwise.
-     */
-	void setDebug(boolean debug);
+    public UserData(String id) {
+        this.id = id;
+    }
 
-    /**
-     * Send a new {@link Engagement} event.
-     * @param engagement Event to send out
-     */
-    void send(Engagement engagement);
+    public UserData() {
+    }
 
-    /**
-     * Send a new {@link Impression} event.
-     * @param impression Event to send out
-     */
-    void send(Impression impression);
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
 }

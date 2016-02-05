@@ -31,9 +31,10 @@ dependencies {
     compile deps.gson
     provided deps.supportv4
 
-//    testCompile deps.junit
-//    testCompile deps.truth
-//    testCompile deps.robolectric
+    testCompile deps.junit
+    testCompile deps.truth
+    testCompile deps.robolectric
+    testCompile deps.mockito
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

@@ -28,44 +28,46 @@
  either expressed or implied, of the FreeBSD Project.
 
  */
-package io.getstream.analytics.service;
+package io.getstream.analytics.beans;
 
-import io.getstream.analytics.beans.Engagement;
-import io.getstream.analytics.beans.Impression;
+import java.io.Serializable;
 
 /**
- * Provide methods to send out events for Engagement and Impression tracking.
+ * A ContentAttribute is a container for "id" and "label" pair of custom data which
+ * will be send along with your Impression/Engagement event.
  */
-public interface StreamAnalytics {
+public class ContentAttribute implements Serializable {
+
+    private final String id;
+    private String label;
 
     /**
-     * Set user data.
-     * @param userId User data
-     * @param alias User id
+     * Create a new ContentAttribute with the given id and label.
+     * @param id Id
+     * @param label Label
      */
-    void setUser(String userId, String alias);
+    public ContentAttribute(String id, String label) {
+        this.id = id;
+        this.label = label;
+    }
 
     /**
-     * Set user id.
-     * @param userId user id
+     * Create a ContentAttribute with the given id.
+     * @param id Id
      */
-	void setUserId(String userId);
+    public ContentAttribute(String id) {
+        this.id = id;
+    }
 
-    /**
-     * Enable/disable the debug mode.
-     * @param debug True if you want to enable th debug mode, false otherwise.
-     */
-	void setDebug(boolean debug);
+    public String getId() {
+        return id;
+    }
 
-    /**
-     * Send a new {@link Engagement} event.
-     * @param engagement Event to send out
-     */
-    void send(Engagement engagement);
+    public String getLabel() {
+        return label;
+    }
 
-    /**
-     * Send a new {@link Impression} event.
-     * @param impression Event to send out
-     */
-    void send(Impression impression);
+    public void setLabel(String label) {
+        this.label = label;
+    }
 }

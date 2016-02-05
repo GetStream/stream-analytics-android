@@ -3,16 +3,20 @@ package io.getstream.analytics.service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
 import com.google.gson.Gson;
-import io.getstream.analytics.beans.Engagement;
-import io.getstream.analytics.beans.Impression;
-import io.getstream.analytics.config.StreamAnalyticsAuth;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import io.getstream.analytics.beans.Content;
+import io.getstream.analytics.beans.Engagement;
+import io.getstream.analytics.beans.Impression;
+import io.getstream.analytics.config.StreamAnalyticsAuth;
 
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -45,8 +49,8 @@ public class StreamAnalyticsServiceTest {
 		Intent intent = new Intent(context, StreamAnalyticsService.class);
 		intent.setAction(StreamAnalyticsService.ACTION_IMPRESSION);
 		intent.putExtra(StreamAnalyticsService.EXTRA_PAYLOAD, GSON.toJson(
-				new Impression.EventBuilder().withForeignIds("1", "2").withFeedId("1").build()
-		));
+                new Impression.EventBuilder().withContentList(new Content.ContentBuilder().withForeignId("1").build()).withFeedId("1").build()
+        ));
 
 		streamAnalyticsService.onHandleIntent(intent);
 	}
@@ -56,8 +60,8 @@ public class StreamAnalyticsServiceTest {
 		Intent intent = new Intent(context, StreamAnalyticsService.class);
 		intent.setAction(StreamAnalyticsService.ACTION_ENGAGEMENT);
 		intent.putExtra(StreamAnalyticsService.EXTRA_PAYLOAD, GSON.toJson(
-				new Engagement.EventBuilder().withForeignId("1").withFeedId("1").build()
-		));
+                new Engagement.EventBuilder().withFeedId("1").build()
+        ));
 
 		streamAnalyticsService.onHandleIntent(intent);
 	}

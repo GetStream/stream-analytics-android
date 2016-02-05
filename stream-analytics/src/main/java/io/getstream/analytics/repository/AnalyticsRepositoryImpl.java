@@ -1,3 +1,33 @@
+/**
+
+ Copyright (c) 2015, Stream.io Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ The views and conclusions contained in the software and documentation are those
+ of the authors and should not be interpreted as representing official policies,
+ either expressed or implied, of the FreeBSD Project.
+
+ */
 package io.getstream.analytics.repository;
 
 import android.util.Log;
@@ -44,9 +74,8 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 	private final HttpUrl impressionEndpoint;
 
     private boolean debug = false;
-    private String userId = null;
 
-	public AnalyticsRepositoryImpl(final OkHttpClient client, StreamAnalyticsAuth analyticsAuth) {
+    public AnalyticsRepositoryImpl(final OkHttpClient client, StreamAnalyticsAuth analyticsAuth) {
         this.client = client;
         this.authToken = analyticsAuth.getAuthToken();
         this.engagementEndpoint = HttpUrl.parse(BASE_ENDPOINT).
@@ -56,14 +85,6 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 				newBuilder().addPathSegment(IMPRESSION_PATH_PARAM).addQueryParameter(PARAM_API_KEY,
                 analyticsAuth.getApiKey()).build();
 	}
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
 
     @Override
     public void setDebug(boolean debug) {
@@ -122,11 +143,6 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
                 .addHeader(HEADER_STREAM_AUTH_TYPE, AUTH_TYPE_JWT)
                 .addHeader(HEADER_AUTHORIZATION, authToken)
                 .build());
-    }
-
-    @Override
-    public OkHttpClient getClient() {
-        return client;
     }
 
     public void performVoidCall(Request request) {
