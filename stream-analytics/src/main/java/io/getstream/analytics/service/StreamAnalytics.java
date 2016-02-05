@@ -1,75 +1,71 @@
+/**
+
+ Copyright (c) 2015, Stream.io Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ The views and conclusions contained in the software and documentation are those
+ of the authors and should not be interpreted as representing official policies,
+ either expressed or implied, of the FreeBSD Project.
+
+ */
 package io.getstream.analytics.service;
 
 import io.getstream.analytics.beans.Engagement;
 import io.getstream.analytics.beans.Impression;
-import io.getstream.analytics.config.StreamAnalyticsAuth;
-import io.getstream.analytics.config.StreamAnalyticsClient;
-import io.getstream.analytics.repository.AnalyticsRepositoryImpl;
 
-public final class StreamAnalytics {
+/**
+ * Provide methods to send out events for Engagement and Impression tracking.
+ */
+public interface StreamAnalytics {
 
-	private static StreamAnalytics instance;
+    /**
+     * Set user data.
+     * @param userId User data
+     * @param alias User id
+     */
+    void setUser(String userId, String alias);
 
-	private final AnalyticsRepositoryImpl repository;
+    /**
+     * Set user id.
+     * @param userId user id
+     */
+	void setUserId(String userId);
 
-	private StreamAnalytics(StreamAnalyticsAuth auth) {
-		this.repository = new AnalyticsRepositoryImpl(new StreamAnalyticsClient().newClient(), auth);
-	}
+    /**
+     * Enable/disable the debug mode.
+     * @param debug True if you want to enable th debug mode, false otherwise.
+     */
+	void setDebug(boolean debug);
 
-	public static StreamAnalytics getInstance() throws IllegalStateException {
-		if (instance == null) {
-			throw new IllegalStateException("No instance created yet - Please initialize with StreamAnalytics.getInstance(StreamAnalyticsAuth auth) first");
-		}
-		return instance;
-	}
+    /**
+     * Send a new {@link Engagement} event.
+     * @param engagement Event to send out
+     */
+    void send(Engagement engagement);
 
-	public static StreamAnalytics getInstance(StreamAnalyticsAuth auth) {
-		if (instance == null) {
-			synchronized(StreamAnalytics.class) {
-				if (instance == null) {
-					instance = new StreamAnalytics(auth);
-				}
-			}
-		}
-		return instance;
-	}
-
-	public void setUser(String userId, String alias) {
-		this.setUserId(userId);
-		this.setAlias(alias);
-	}
-
-	public void setUserId(String userId) {
-		this.repository.setUserId(userId);
-	}
-
-	public void setAlias(String alias) {
-		this.repository.setAlias(alias);
-	}
-
-	public String getUserId() {
-		return this.repository.getUserId();
-	}
-
-	public void setDebug(boolean debug) {
-		this.repository.setDebug(debug);
-	}
-
-	public void send(Engagement engagement) {
-		repository.sendEngagement(engagement);
-	}
-
-	public void send(Impression impression) {
-		repository.sendImpression(impression);
-	}
-
-	// Used by service
-	public void handleActionEngagement(String jsonPayload) {
-		repository.sendEngagement(jsonPayload);
-	}
-
-	// Used by service
-	public void handleActionImpression(String jsonPayload) {
-		repository.sendImpression(jsonPayload);
-	}
+    /**
+     * Send a new {@link Impression} event.
+     * @param impression Event to send out
+     */
+    void send(Impression impression);
 }

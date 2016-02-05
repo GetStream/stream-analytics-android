@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 public class ImpressionTest {
 
     private final Gson gson = new Gson();
@@ -13,28 +16,38 @@ public class ImpressionTest {
         Impression impression = new Impression.EventBuilder()
                 .withContentList(
                         new Content.ContentBuilder()
-                                .withForeignId("message:34349698")
+                                .withForeignId("tweet:34349698")
                                 .withAttribute("verb", "share")
                                 .withAttribute("actor", new ContentAttribute("1", "user1"))
                                 .build(),
                         new Content.ContentBuilder()
-                                .withForeignId("message:34349699")
+                                .withForeignId("tweet:34349699")
                                 .build(),
                         new Content.ContentBuilder()
-                                .withForeignId("message:34349610")
+                                .withForeignId("tweet:34349610")
                                 .build()
                 )
-                .withFeedId("1")
+                .withFeedId("flat:tommaso")
+                .withLocation("android-app")
                 .build();
-        System.out.println(gson.toJson(impression));
+        String resultString = gson.toJson(impression);
+        assertTrue(resultString.contains("flat:tommaso"));
+        assertTrue(resultString.contains("content_list"));
+        assertTrue(resultString.contains("tweet:34349699"));
+        assertTrue(resultString.contains("tweet:34349610"));
     }
 
     @Test
     public void shouldCreateImpressionWithoutContent() {
         Impression impression = new Impression.EventBuilder()
-                .withFeedId("1")
+                .withFeedId("flat:tommaso")
+                .withUser("id1", "alias")
                 .build();
-        System.out.println(gson.toJson(impression));
+        String resultString = gson.toJson(impression);
+        assertTrue(resultString.contains("user_data"));
+        assertTrue(resultString.contains("id1"));
+        assertTrue(resultString.contains("alias"));
+        assertFalse(resultString.contains("content"));
     }
 
     @Test(expected = RuntimeException.class)
@@ -54,6 +67,5 @@ public class ImpressionTest {
                 )
                 .withFeedId("1")
                 .build();
-        System.out.println(gson.toJson(impression));
     }
 }

@@ -4,17 +4,19 @@ import com.google.gson.Gson;
 
 import org.junit.Test;
 
-import java.io.Serializable;
+import java.util.Arrays;
+
+import static org.junit.Assert.assertTrue;
 
 public class EngagementTest {
 
     private final Gson gson = new Gson();
 
     @Test
-    public void shouldCreateImpression() {
+    public void shouldCreateEngagement() {
         Engagement engagement = new Engagement.EventBuilder()
                 .withUser("id", "alias")
-                .withFeedId("1")
+                .withFeedId("user:thierry")
                 .withContent(
                         new Content.ContentBuilder()
                                 .withForeignId("message:34349698")
@@ -22,17 +24,33 @@ public class EngagementTest {
                                 .withAttribute("actor", new ContentAttribute("1", "user1"))
                                 .build()
                 )
+                .withBoost(2)
+                .withLocation("profile_page")
+                .withPosition("3")
+                .withFeatures(new Feature("profile", "rock"))
+                .withFeatures(Arrays.asList(new Feature("theme", "black")))
                 .build();
-        System.out.println(gson.toJson(engagement));
+        String resultString = gson.toJson(engagement);
+        System.out.println(resultString);
+        assertTrue(resultString.contains("content"));
+        assertTrue(resultString.contains("message:34349698"));
+        assertTrue(resultString.contains("label"));
+        assertTrue(resultString.contains("user1"));
+        assertTrue(resultString.contains("rock"));
+        assertTrue(resultString.contains("black"));
     }
 
-    public class Label implements Serializable {
-        private String country;
-        private String artist;
-
-        public Label(String country, String artist) {
-            this.country = country;
-            this.artist = artist;
-        }
+    @Test(expected = RuntimeException.class)
+    public void shouldFailCreatingEngagement() {
+        Engagement engagement = new Engagement.EventBuilder()
+                .withUser("id", "alias")
+                .withFeedId("1")
+                .withContent(
+                        new Content.ContentBuilder()
+                                .withAttribute("verb", "share")
+                                .withAttribute("actor", new ContentAttribute("1", "user1"))
+                                .build()
+                )
+                .build();
     }
 }

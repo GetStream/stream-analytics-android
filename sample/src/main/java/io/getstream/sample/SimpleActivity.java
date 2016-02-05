@@ -12,6 +12,7 @@ import io.getstream.analytics.beans.Feature;
 import io.getstream.analytics.beans.Impression;
 import io.getstream.analytics.config.StreamAnalyticsAuth;
 import io.getstream.analytics.service.StreamAnalytics;
+import io.getstream.analytics.service.StreamAnalyticsImpl;
 
 public class SimpleActivity extends Activity {
     StreamAnalytics mStreamAnalytics;
@@ -25,7 +26,7 @@ public class SimpleActivity extends Activity {
                 getString(R.string.auth_api_key),
                 getString(R.string.auth_api_token)
         );
-        mStreamAnalytics = StreamAnalytics.getInstance(auth);
+        mStreamAnalytics = StreamAnalyticsImpl.getInstance(auth);
         mStreamAnalytics.setUserId("486892");
         mStreamAnalytics.setDebug(BuildConfig.DEBUG);
     }

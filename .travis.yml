@@ -18,7 +18,7 @@ matrix:
         - $(git ls-files -o | grep stream-analytics/build/outputs/aar/stream-analytics-release | tr "\n" ":")
 
 script:
-- "./gradlew assembleRelease"
+- "./gradlew test assembleRelease"
 deploy:
   provider: releases
   api_key:
