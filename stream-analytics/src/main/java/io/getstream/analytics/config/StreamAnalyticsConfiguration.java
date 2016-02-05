@@ -38,12 +38,12 @@ public class StreamAnalyticsConfiguration {
     /**
      * Socket timeout in ms.
      */
-    public static final int TIMEOUT_IN_MS = 500;
+    public static final int TIMEOUT_IN_MS = 10_000;
 
     /**
      * Connection timeout in ms.
      */
-    public static final int CONNECTION_TIMEOUT_IN_MS = 500;
+    public static final int CONNECTION_TIMEOUT_IN_MS = 10_000;
 
     /**
      * TimeToLive in ms.
@@ -53,12 +53,12 @@ public class StreamAnalyticsConfiguration {
     /**
      * Keep alive in ms.
      */
-    public static final long KEEP_ALIVE_IN_MS = 3000;
+    public static final long KEEP_ALIVE_IN_MS = 300_000;
 
     /**
      * Max concurrent connection the pool should handle.
      */
-    public static final int MAX_CONNECTIONS = 20;
+    public static final int MAX_CONNECTIONS = 5;
 
     private int timeout = TIMEOUT_IN_MS;
     private int connectionTimeout = CONNECTION_TIMEOUT_IN_MS;
