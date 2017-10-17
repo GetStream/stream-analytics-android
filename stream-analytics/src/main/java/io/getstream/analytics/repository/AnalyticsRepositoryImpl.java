@@ -55,7 +55,7 @@ public class AnalyticsRepositoryImpl implements AnalyticsRepository {
 
     public static final String TAG = AnalyticsRepositoryImpl.class.getSimpleName();
 
-	public static final String BASE_ENDPOINT = "https://analytics.getstream.io/analytics/v1.0/";
+	public static final String BASE_ENDPOINT = "https://analytics.stream-io-api.com/analytics/v1.0/";
 
     public static final String IMPRESSION_PATH_PARAM = "impression/";
 	public static final String ENGAGEMENT_PATH_PARAM = "engagement/";
